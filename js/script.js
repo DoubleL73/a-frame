@@ -6,15 +6,8 @@ $(document).ready(function(){
 });
 $(document).keydown(function(e) {
   switch(e.which) {
-    case 37: // left
-      $('.carousel').carousel('prev');
-      break;
-    case 38: // up
-      break;
-    case 39: // right
-      $('.carousel').carousel('next');
-      break;
-    case 40: // down
+    case 74: // left
+      window.location.replace("/jeu.html");
       break;
     default: return; // exit this handler for other keys
   }
