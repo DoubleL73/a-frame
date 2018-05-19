@@ -7,7 +7,7 @@ $(document).ready(function(){
 $(document).keydown(function(e) {
   switch(e.which) {
     case 74: // left
-      window.location.replace("/jeu.html");
+      window.location.replace("/a-frame/jeu.html");
       break;
     default: return; // exit this handler for other keys
   }
