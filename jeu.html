@@ -50,9 +50,9 @@
       var camera = document.getElementById('camera');
 
       var speed = {'x':0, 'y':0, 'z':0};
-      var acceleration =  {'x':0, 'y':0, 'z':-0.1};
+      var acceleration =  {'x':0, 'y':0, 'z':-0.18};
 
-      var maxSpeed = -0.1;
+      var maxSpeed = -0.18;
       var maxXSpeed = 0.08;
       var maxYSpeed = 0.004;
       
@@ -75,7 +75,7 @@
 	  acceleration.x =  - currRot.y / 90;
 	  
 	  // update y speed
-	  speed.y = speed.y + acceleration.y * 0.005;
+	  speed.y = speed.y + acceleration.y * 0.03;
 	  if (speed.y > maxYSpeed){
 	      speed.Y = maxYSpeed;
 	  }
