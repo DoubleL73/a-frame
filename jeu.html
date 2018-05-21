@@ -54,7 +54,7 @@
 
       var maxSpeed = -0.18;
       var maxXSpeed = 0.08;
-      var maxYSpeed = 0.004;
+      var maxYSpeed = 0.001;
       
       function createCercle(x, y, z){
 	  var newCercle = document.createElement("a-ring");
@@ -75,7 +75,7 @@
 	  acceleration.x =  - currRot.y / 90;
 	  
 	  // update y speed
-	  speed.y = speed.y + acceleration.y * 0.03;
+	  speed.y = speed.y + acceleration.y * 0.01;
 	  if (speed.y > maxYSpeed){
 	      speed.Y = maxYSpeed;
 	  }
