@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Space Madness</title>
-    <meta name="Space Madness" content="Du sang et des larmes">
+    <title>Space Madness 2</title>
+    <meta name="Space Madness 2" content="Du sang et des larmes">
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
   </head>
@@ -50,11 +50,11 @@
       var camera = document.getElementById('camera');
 
       var speed = {'x':0, 'y':0, 'z':0};
-      var acceleration =  {'x':0, 'y':0, 'z':-0.0005};
+      var acceleration =  {'x':0, 'y':0, 'z':-0.1};
 
-      var maxSpeed = -0.001;
-      var maxXSpeed = 0.005;
-      var maxYSpeed = 0.01;
+      var maxSpeed = -0.1;
+      var maxXSpeed = 0.08;
+      var maxYSpeed = 0.004;
       
       function createCercle(x, y, z){
 	  var newCercle = document.createElement("a-ring");
@@ -73,20 +73,48 @@
 	  // update acceleration
 	  acceleration.y = currRot.x / 90;
 	  acceleration.x =  - currRot.y / 90;
-
+	  
+	  // update y speed
+	  speed.y = speed.y + acceleration.y * 0.005;
+	  if (speed.y > maxYSpeed){
+	      speed.Y = maxYSpeed;
+	  }
+	  if (speed.y < -maxYSpeed){
+	      speed.Y = -maxYSpeed;
+	  }
+	  
+	  // update x speed
+	  speed.x = speed.x + acceleration.x * 0.1;
+	  if (speed.x > maxXSpeed){
+	      speed.x = maxXSpeed;
+	  }
+	  if (speed.x < -maxXSpeed){
+	      speed.x = -maxXSpeed;
+	  }
+	  
 	  // update z speed
 	  speed.z = speed.z + acceleration.z;
-	  if (acceleration.z < maxSpeed){
+	  if(speed.y > 0 ){
+	      speed.z = speed.z - maxSpeed*((maxYSpeed/speed.y)*0.1);
+	  }
+	  if(speed.y < 0 ){
+	      speed.z = speed.z + maxSpeed*((-maxYSpeed/speed.y)*0.1);
+	  }
+
+	  if(speed.x > 0 ){
+	      speed.z = speed.z - maxSpeed*((maxXSpeed/speed.x)*0.1);
+	  }
+	  if(speed.x < 0 ){
+	      speed.z = speed.z + maxSpeed*((-maxXSpeed/speed.x)*0.1);
+	  }
+	  
+	  if (speed.z > -0.05){
+	      speed.z = -0.05;
+	  }
+	  if (speed.z < maxSpeed){
 	      speed.z = maxSpeed;
 	  }
 
-	  // update y speed
-	  speed.y = speed.y + acceleration.y * 0.01;
-	  
-
-	  // update x speed
-	  speed.x = speed.x + acceleration.x * 0.004;
-	  
 	  // update position
 	  player.setAttribute("position", { 'x':player.getAttribute('position').x + speed.x,
 					    'y':player.getAttribute('position').y + speed.y,
